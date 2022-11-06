@@ -1,0 +1,25 @@
+* {
+          box-sizing: border-box;
+}
+
+body {
+          height: 100%;
+          margin: 0;
+}
+
+button{
+          width: 80px;
+          height: auto;
+          background-color: orange;
+          border: none;
+          border-radius: 5px;
+          transition-duration: .4s;
+}
+
+button:hover {
+          background-color: yellow;
+}
+button:focus {
+          border: none;
+          outline color: grey;
+}
