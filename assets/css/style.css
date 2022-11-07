@@ -116,3 +116,57 @@ input {
 .historyItems{
           margin-top: 0px;
 }
+
+.historyItems:nth-child() {
+          margin-top: 0px;
+}
+
+img {
+          height: 0px;
+          width: auto;
+}
+
+input {
+          height: 0px;
+          width: auto;
+}
+
+li:first-child {
+          height: 0%;
+          font-size: larger;
+          background-color: white;
+          border: solid 1px whitesmoke;
+          border-radius: 0px 0px 0px 0px;
+          padding: 0px 0px 0px 0px;
+          list-style: none;
+}
+
+li{
+          height: 0%;
+          font-size: larger;
+          background-color: white;
+          border: solid 1px whitesmoke;
+          border-radius: 0px 0px 0px 0px;
+          padding: 0px 0px 0px 0px;
+          list-style: none;
+}
+
+li:last-child {
+          height: 0%;
+          font-size: larger;
+          background-color: white;
+          border: solid 1px whitesmoke;
+          border-radius: 0px 0px 0px 0px;
+          padding: 0px 0px 0px 0px;
+          list-style: none;
+}
+
+.row{
+          display: flex;
+          line-height: 0%;
+          margin: 0px 0px 0px 0px;
+}
+
+.row *{
+          margin-right: 0px;
+}
