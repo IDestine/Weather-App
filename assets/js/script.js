@@ -20,7 +20,7 @@ var today = new Date();
 let dd = String(today.getDate()).padStart(2, "0");
 let mm = String(today.getMonth() + 1).padStart(2, "0");
 let yyyy = today.getFullYear();
-var today = mm + "/" + dd + "/" + yyyy;
+var today = mm + "/" + dd + "/" + yyhyy;
 
 // Local storage for historyItems
 if (JSON.parse(localStorage.getItem("searchHistory")) === null) {
@@ -120,4 +120,47 @@ function getWeather(desiredCity) {
           }
       })  
       });
+}
+
+    // get a five day forecast for the selected city
+    getFiveDayForecast();
+    function getFiveDayForecast() {
+        cardRow.empty();
+        let queryUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${desiredCity}&APPID=${apiKey}&units=imperial`;
+        $.ajax({
+            url: queryUrl,
+            method: "GET"
+        })
+        // loop response to end of results
+        .then(function(fiveDayReponse) {
+            for (let i = 0; i != fiveDayReponse.list.length; i+=8 ) {
+                let cityObj = {
+                    date: fiveDayReponse.list[i].dt_txt,
+                    icon: fiveDayReponse.list[i].weather[0].icon,
+                    temp: fiveDayReponse.list[i].main.temp,
+                    humidity: fiveDayReponse.list[i].main.humidity
+                }
+                let dateStr = cityObj.date;
+                let trimmedDate = dateStr.substring(0, 10); 
+                let weatherIco = `https:///openweathermap.org/img/w/${cityObj.icon}.png`;
+                createForecastCard(trimmedDate, weatherIco, cityObj.temp, cityObj.humidity);
+            }
+        })
+    }   
+
+// HTML elements 
+function createForecastCard(date, icon, temp, humidity) {
+    let fiveDayCardEl = $("<div>").attr("class", "five-day-card");
+    let cardDate = $("<h3>").attr("class", "card-text");
+    let cardIcon = $("<img>").attr("class", "weatherIcon");
+    let cardTemp = $("<p>").attr("class", "card-text");
+    let cardHumidity = $("<p>").attr("class", "card-text");
+    
+    // html with data
+    cardRow.append(fiveDayCardEl);
+    cardDate.text(date);
+    cardIcon.attr("src", icon);
+    cardTemp.text(`Temp: ${temp} °F`);
+    cardHumidity.text(`Humidity: ${humidity}%`);
+    fiveDayCardEl.append(cardDate, cardIcon, cardTemp, cardHumidity);
 }
